@@ -42,7 +42,7 @@ function showQuestion(question) {
         const button = document.createElement('button');
         button.innerText = answer.text
         button.classList.add('btn');
-        
+        button.dataset.correct = answer.correct
 
         button.addEventListener('click', selectAnswer)
         //Finalize button property so that the questionnaire can begin.
@@ -62,8 +62,9 @@ function resetState() {
 
 function selectAnswer(e) {
     const selectedButton = e.target
-    const correct = selectedButton.dataset.correct
-    setStatusClass(document.body, correct)
+    const isCorrect = selectedButton.dataset.correct
+    setStatusClass(document.body, isCorrect)
+    console.log(isCorrect)
     Array.from(answerButtonsElements.children).forEach(button => {
         setStatusClass(button, button.dataset.correct)
     })
@@ -76,9 +77,9 @@ function selectAnswer(e) {
     }
     
  
-    function setStatusClass(element, correct) {
+    function setStatusClass(element, isCorrect) {
         clearStatusClass(element)
-        if(correct) {
+        if(isCorrect) {
             element.classList.add('correct')
         } else {
             element.classList.add('wrong')
@@ -90,10 +91,10 @@ function selectAnswer(e) {
         element.classList.remove('wrong')
     }
     
-    
-    if (answer.correct); {
-        button.dataset.correct = answer.correct
-    }   
+                   
+    // if (question.answers[0]); {
+    //     button.dataset.correct = answers.correct
+    // }   
 }
 
 
